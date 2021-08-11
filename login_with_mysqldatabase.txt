@@ -1,0 +1,106 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Color;
+
+public class loginpage extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField username1;
+	private JPasswordField password1;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					loginpage frame = new loginpage();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public loginpage() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.LIGHT_GRAY);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("LOGINPAGE");
+		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		lblNewLabel.setBounds(172, 11, 81, 14);
+		contentPane.add(lblNewLabel);
+		
+		JLabel username = new JLabel("USERNAME");
+		username.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		username.setBounds(48, 59, 87, 14);
+		contentPane.add(username);
+		
+		JLabel password = new JLabel("PASSWORD");
+		password.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		password.setBounds(48, 113, 87, 14);
+		contentPane.add(password);
+		
+		username1 = new JTextField();
+		username1.setBounds(179, 56, 119, 20);
+		contentPane.add(username1);
+		username1.setColumns(10);
+		
+		password1 = new JPasswordField();
+		password1.setBounds(181, 110, 119, 20);
+		contentPane.add(password1);
+		
+		JButton btnNewButton = new JButton("LOGIN");
+		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String u=username.getText();
+				String p=password.getText();
+				try{
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/reg_form","root","root");
+				}
+			    catch(Exception e1)
+				{
+					System.out.println(e1);
+				}
+			}	
+		});
+		btnNewButton.setBounds(46, 187, 89, 23);
+		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("REGISTER");
+		btnNewButton_1.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Details window = new Details();
+				window.frame.setVisible(true);
+			}
+		});
+		btnNewButton_1.setBounds(264, 187, 89, 23);
+		contentPane.add(btnNewButton_1);
+	}
+}
