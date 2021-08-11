@@ -1,0 +1,205 @@
+import java.awt.EventQueue;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.regex.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
+
+public class Form01 implements ActionListener {
+
+	private JFrame frame;
+	private JTextField fn;
+	private JTextField ln;
+	private JTextField mn;
+	private JTextField adr;
+	private JTextField emi;
+	private JTextField phn;
+	private JTextField hei;
+	private JTextField wei;
+	private JTextArea tout;
+	private JTextField zip;
+	
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Form01 window = new Form01();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public Form01() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 642, 503);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		
+		JLabel lblNewLabel = new JLabel("FORM");
+		lblNewLabel.setBounds(234, 11, 97, 14);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("FIRST NAME :");
+		lblNewLabel_1.setBounds(10, 52, 94, 14);
+		frame.getContentPane().add(lblNewLabel_1);
+		
+		fn = new JTextField();
+		fn.setBounds(186, 49, 146, 20);
+		frame.getContentPane().add(fn);
+		fn.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("LAST NAME  :");
+		lblNewLabel_2.setBounds(10, 94, 94, 14);
+		frame.getContentPane().add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("MIDDLE NAME :");
+		lblNewLabel_3.setBounds(10, 143, 94, 14);
+		frame.getContentPane().add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("ADDRESS  :");
+		lblNewLabel_4.setBounds(10, 220, 94, 14);
+		frame.getContentPane().add(lblNewLabel_4);
+		
+		JLabel em = new JLabel("EMAIL   :");
+		em.setBounds(10, 313, 97, 14);
+		frame.getContentPane().add(em);
+		
+		JLabel ph = new JLabel("PHONE NUMBER :");
+		ph.setBounds(10, 349, 97, 14);
+		frame.getContentPane().add(ph);
+		
+		JLabel lblNewLabel_7 = new JLabel("HEIGHT(Ft/Inches)   :");
+		lblNewLabel_7.setBounds(10, 399, 127, 14);
+		frame.getContentPane().add(lblNewLabel_7);
+		
+		JLabel lblNewLabel_8 = new JLabel("WEIGHT(kgs)   :");
+		lblNewLabel_8.setBounds(208, 399, 97, 14);
+		frame.getContentPane().add(lblNewLabel_8);
+		
+		ln = new JTextField();
+		ln.setBounds(186, 91, 146, 20);
+		frame.getContentPane().add(ln);
+		ln.setColumns(10);
+		
+		mn = new JTextField();
+		mn.setBounds(185, 140, 146, 20);
+		frame.getContentPane().add(mn);
+		mn.setColumns(10);
+		
+		adr = new JTextField();
+		adr.setBounds(185, 202, 146, 50);
+		frame.getContentPane().add(adr);
+		adr.setColumns(10);
+		
+		emi = new JTextField();
+		emi.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				String regex="^\\w+\\W\\w+\\.\\w+$";
+				Pattern patt = Pattern.compile(regex);
+				Matcher match=patt.matcher(emi.getText());
+			}
+		});
+		emi.setBounds(186, 307, 146, 20);
+		frame.getContentPane().add(emi);
+		emi.setColumns(10);
+		
+		phn = new JTextField();
+		phn.setBounds(185, 343, 146, 20);
+		frame.getContentPane().add(phn);
+		phn.setColumns(10);
+		
+		hei = new JTextField();
+		hei.setBounds(137, 396, 39, 20);
+		frame.getContentPane().add(hei);
+		hei.setColumns(10);
+		
+		wei = new JTextField();
+		wei.setBounds(319, 396, 39, 20);
+		frame.getContentPane().add(wei);
+		wei.setColumns(10);
+		
+		JButton sav = new JButton("SAVE");
+		sav.setBounds(223, 430, 89, 23);
+		frame.getContentPane().add(sav);
+		sav.addActionListener(this);
+		
+		tout = new JTextArea();
+		tout.setEditable(false);
+		tout.setBounds(365, 44, 251, 295);
+		frame.getContentPane().add(tout);
+		
+		JLabel lblNewLabel_5 = new JLabel("COUNTRY   :");
+		lblNewLabel_5.setBounds(10, 177, 97, 14);
+		frame.getContentPane().add(lblNewLabel_5);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"INDIA", "USA", "UK", "UAE", "RUSSIA"}));
+		comboBox.setBounds(186, 171, 145, 20);
+		frame.getContentPane().add(comboBox);
+		
+		JLabel lblNewLabel_6 = new JLabel("ZIP CODE :");
+		lblNewLabel_6.setBounds(10, 277, 94, 14);
+		frame.getContentPane().add(lblNewLabel_6);
+		
+		zip = new JTextField();
+		zip.setBounds(186, 276, 145, 20);
+		frame.getContentPane().add(zip);
+		zip.setColumns(10);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		String fin= fn.getText();
+		String las = ln.getText();
+		String mid = mn.getText();
+		String adress = adr.getText();
+		String zipcode = zip.getText();
+		String email = emi.getText();
+		String phnum = phn.getText();
+		String height = hei.getText();
+		String weight = wei.getText();
+		String data = "firstName :  "+fn.getText()+"\n"+"lastname  :"+ln.getText()+"\n"+
+		"Middle Name  :"+mn.getText()+"\n"+"Email   :"+emi.getText()
+		+"\n"+"Adress   :"+adr.getText()+"\n"+"Zipcode   :"+zip.getText()+"\n"+"PhoneNumber   :"+phn.getText()+"\n"+
+		"Height   :"+hei.getText()+"\n"+"Weight   :"+wei.getText();
+		
+		tout.setText("FIRSTNAME : "+fin+"\n"+"LASTNAME : "+las+"\n"+"MIDDLENAME : "+mid
+				+"\n"+"ADRESS : "+adress+"\n"+"AZIPCODE   :"+zipcode+"\n"+"EMAIL ID : "+email+"\n"+"PHONENUMBER : "+phnum+
+				"\n"+"HEIGHT : "+height+"\n"+"WEIGHT : "+weight);
+		
+		
+		
+			
+		}
+	}
+class Form1{
+	public static void main(String args[]) {
+		Form01 window = new Form01();
+	}
+}
+
+
